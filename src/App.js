@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import { useFetch } from 'react-hooks-fetch';
+import React, { Suspense } from 'react';
+
+function DisplayRemoteData() {
+  const { error, data } = useFetch('https://api.github.com/repos/LiskHQ/lisk-hub/commits');
+  if (error) return <span>{`Error:${error.message}`}</span>;
+  if (!data) return null; // this is important
+  return (
+    <span>
+      RemoteData:
+      {JSON.stringify(data)}
+    </span>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<span>Loading...</span>}>
+      <DisplayRemoteData />
+    </Suspense>
   );
 }
 

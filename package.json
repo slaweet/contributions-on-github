@@ -5,7 +5,12 @@
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-hooks-fetch": "^0.10.0",
     "react-scripts": "3.2.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-react": "^7.16.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -13,8 +18,64 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "eslintIgnore": [
+    "build"
+  ],
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "airbnb",
+      "plugin:react/recommended"
+    ],
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "jsx-a11y/anchor-is-valid": [
+        "error",
+        {
+          "components": [
+            "Link"
+          ],
+          "specialLink": [
+            "to"
+          ]
+        }
+      ],
+      "complexity": [
+        "error",
+        6
+      ],
+      "max-depth": [
+        "error",
+        3
+      ],
+      "max-nested-callbacks": [
+        "error",
+        3
+      ],
+      "max-statements": [
+        "error",
+        10
+      ],
+      "max-lines": [
+        "error",
+        150
+      ]
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
   },
   "browserslist": {
     "production": [
