@@ -1,3 +1,5 @@
+import 'chartjs-plugin-colorschemes';
+
 import { Bubble } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 import React from 'react';
