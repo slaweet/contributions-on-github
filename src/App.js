@@ -16,12 +16,16 @@ function transformCommit({ commit, author, sha }) {
 }
 
 function DisplayRemoteData() {
-  const { error, data } = useFetch('https://api.github.com/repos/LiskHQ/lisk-hub/commits');
+  const config = {
+    username: 'LiskHQ',
+    repo: 'lisk-hub',
+  };
+  const { error, data } = useFetch(`https://api.github.com/repos/${config.username}/${config.repo}/commits`);
   if (error) return <span>{`Error:${error.message}`}</span>;
   if (!data) return null; // this is important
   return (
     <span>
-      <PunchChart commits={data.map(transformCommit)} />
+      <PunchChart commits={data.map(transformCommit)} config={config} />
     </span>
   );
 }

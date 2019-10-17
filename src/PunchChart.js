@@ -2,9 +2,9 @@ import { Bubble } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function PunchChart({ commits }) {
+export default function PunchChart({ commits, config }) {
   const data = () => {
-    const config = {
+    const chartData = {
       datasets: Object.values(commits.reduce((accumulator, commit, i) => ({
         ...accumulator,
         [commit.author.login]: {
@@ -20,7 +20,7 @@ export default function PunchChart({ commits }) {
         },
       }), {})),
     };
-    return config;
+    return chartData;
   };
 
   return (
@@ -38,7 +38,7 @@ export default function PunchChart({ commits }) {
           sha, message, author, date,
         }) => (
           <li key={sha}>
-            <a href={`https://github.com/LiskHQ/lisk-hub/commits/${sha}`}>
+            <a href={`https://github.com/${config.username}/${config.repo}/commit/${sha}`}>
               {sha.substr(0, 6)}
             </a>
             {' '}
@@ -58,4 +58,5 @@ export default function PunchChart({ commits }) {
 
 PunchChart.propTypes = {
   commits: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  config: PropTypes.shape().isRequired,
 };
