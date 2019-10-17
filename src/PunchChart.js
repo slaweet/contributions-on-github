@@ -1,19 +1,21 @@
 import { Bubble } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 import React from 'react';
+import moment from 'moment';
 
 export default function PunchChart({ commits, config }) {
   const data = () => {
     const chartData = {
-      datasets: Object.values(commits.reduce((accumulator, commit, i) => ({
+      datasets: Object.values(commits.reduce((accumulator, commit) => ({
         ...accumulator,
         [commit.author.login]: {
           data: [
             ...(accumulator[commit.author.login] || { data: [] }).data,
             {
-              x: 3 + i,
-              y: 2,
-              r: commit.comment_count + 1,
+              x: moment(commit.date).hour() + moment(commit.date).minute() / 60,
+              y: moment().diff(moment(commit.date), 'days'),
+              r: commit.comment_count + 10,
+              message: commit.message,
             },
           ],
           label: commit.author.login,
@@ -21,6 +23,14 @@ export default function PunchChart({ commits, config }) {
       }), {})),
     };
     return chartData;
+  };
+
+  const options = {
+    scales: {
+      xAxes: [{
+        ticks: { callback: (value) => `${value}:00` },
+      }],
+    },
   };
 
   return (
@@ -32,6 +42,7 @@ export default function PunchChart({ commits, config }) {
     >
       <Bubble
         data={data}
+        options={options}
       />
       <ul>
         {commits.map(({
@@ -48,7 +59,7 @@ export default function PunchChart({ commits, config }) {
               <img src={`https://avatars3.githubusercontent.com/u/${author.id}?s=20&v=4`} alt="avatar" />
               {` ${author.login}`}
             </a>
-            {` on ${date} : ${message}`}
+            {` ${moment(date)} : ${message}`}
           </li>
         ))}
       </ul>
