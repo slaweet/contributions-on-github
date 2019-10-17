@@ -1,51 +1,61 @@
-import { Chart } from 'react-charts';
+import { Bubble } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function PunchChart() {
-  const data = React.useMemo(
-    () => [
-      {
-        label: 'Series 1',
-        data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]],
-      },
-      {
-        label: 'Series 2',
-        data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]],
-      },
-    ],
-    [],
-  );
-
-  const axes = React.useMemo(
-    () => [
-      { primary: true, type: 'linear', position: 'bottom' },
-      { type: 'linear', position: 'left' },
-    ],
-    [],
-  );
-
-  const series = React.useMemo(
-    () => ({
-      type: 'bubble',
-      showPoints: false,
-    }),
-    [],
-  );
+export default function PunchChart({ commits }) {
+  const data = () => {
+    const config = {
+      datasets: Object.values(commits.reduce((accumulator, commit, i) => ({
+        ...accumulator,
+        [commit.author.login]: {
+          data: [
+            ...(accumulator[commit.author.login] || { data: [] }).data,
+            {
+              x: 3 + i,
+              y: 2,
+              r: commit.comment_count + 1,
+            },
+          ],
+          label: commit.author.login,
+        },
+      }), {})),
+    };
+    return config;
+  };
 
   return (
     <div
       style={{
-        width: '400px',
+        width: '95vw',
         height: '300px',
       }}
     >
-      <Chart
+      <Bubble
         data={data}
-        axes={axes}
-        series={series}
-        grouping="single"
-        tooltip
       />
+      <ul>
+        {commits.map(({
+          sha, message, author, date,
+        }) => (
+          <li key={sha}>
+            <a href={`https://github.com/LiskHQ/lisk-hub/commits/${sha}`}>
+              {sha.substr(0, 6)}
+            </a>
+            {' '}
+             by
+            {' '}
+            <a href={`https://github.com/${author.login}`}>
+              <img src={`https://avatars3.githubusercontent.com/u/${author.id}?s=20&v=4`} alt="avatar" />
+              {` ${author.login}`}
+            </a>
+            {` on ${date} : ${message}`}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
+
+PunchChart.propTypes = {
+  commits: PropTypes.arrayOf(PropTypes.shape).isRequired,
+};

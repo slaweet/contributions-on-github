@@ -7,10 +7,11 @@ import PunchChart from './PunchChart';
 
 function transformCommit({ commit, author, sha }) {
   return {
-    author: author.login,
+    author: { login: author.login, id: author.id },
     date: commit.author.date,
     message: commit.message,
     sha,
+    comment_count: commit.comment_count,
   };
 }
 
@@ -20,9 +21,7 @@ function DisplayRemoteData() {
   if (!data) return null; // this is important
   return (
     <span>
-      <PunchChart />
-      RemoteData:
-      {JSON.stringify(data.map(transformCommit))}
+      <PunchChart commits={data.map(transformCommit)} />
     </span>
   );
 }
