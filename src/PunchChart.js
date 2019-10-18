@@ -16,8 +16,8 @@ export default function PunchChart({ commits, config }) {
             {
               x: moment(commit.date).hour() + moment(commit.date).minute() / 60,
               y: moment().diff(moment(commit.date), 'days'),
-              r: commit.comment_count + 10,
-              message: commit.message,
+              r: commit.comment_count + 5,
+              commit,
             },
           ],
           label: commit.author.login,
@@ -28,6 +28,16 @@ export default function PunchChart({ commits, config }) {
   };
 
   const options = {
+    tooltips: {
+      callbacks: {
+        title(tooltipItem, _data) {
+          return _data.labels[tooltipItem[0].index];
+        },
+        label(tooltipItem, _data) {
+          return _data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].commit.message;
+        },
+      },
+    },
     scales: {
       xAxes: [{
         ticks: { callback: (value) => `${value}:00` },
