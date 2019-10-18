@@ -5,6 +5,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 
+const getAvatarSrc = (id) => (
+  `https://avatars3.githubusercontent.com/u/${id}?s=20&v=4`
+);
+
+const getPointStyle = (id) => {
+  const myImage = new Image(20, 20);
+  myImage.src = getAvatarSrc(id);
+  return myImage;
+};
+
 export default function PunchChart({ commits, config }) {
   const data = () => {
     const chartData = {
@@ -21,8 +31,12 @@ export default function PunchChart({ commits, config }) {
             },
           ],
           label: commit.author.login,
+          id: commit.author.id,
         },
-      }), {})),
+      }), {})).map(({ id, ...dataset }) => ({
+        ...dataset,
+        ...(config.showAvatarsAsPoints ? { pointStyle: getPointStyle(id) } : {}),
+      })),
     };
     return chartData;
   };
@@ -68,7 +82,7 @@ export default function PunchChart({ commits, config }) {
              by
             {' '}
             <a href={`https://github.com/${author.login}`}>
-              <img src={`https://avatars3.githubusercontent.com/u/${author.id}?s=20&v=4`} alt="avatar" />
+              <img src={getAvatarSrc(author.id)} alt="avatar" />
               {` ${author.login}`}
             </a>
             {` ${moment(date)} : ${message}`}

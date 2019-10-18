@@ -19,6 +19,7 @@ function DisplayRemoteData() {
   const config = {
     username: 'LiskHQ',
     repo: 'lisk-hub',
+    showAvatarsAsPoints: false,
   };
   const { error, data } = useFetch(`https://api.github.com/repos/${config.username}/${config.repo}/commits`);
   if (error) return <span>{`Error:${error.message}`}</span>;
