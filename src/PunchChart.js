@@ -54,7 +54,16 @@ export default function PunchChart({ commits, config }) {
     },
     scales: {
       xAxes: [{
-        ticks: { callback: (value) => `${value}:00` },
+        ticks: {
+          stepSize: 1,
+          callback: (value) => `${value}:00`,
+        },
+      }],
+      yAxes: [{
+        ticks: {
+          stepSize: 1,
+          callback: (value) => moment().subtract(value, 'days').format('YYYY-MM-DD'),
+        },
       }],
     },
   };
