@@ -34,7 +34,7 @@ export default function PunchChart({ config, commits }) {
       }), {})).map(({ id, ...dataset }) => ({
         ...dataset,
         ...(config.showAvatarsAsPoints ? { pointStyle: getPointStyle(id) } : {}),
-      })),
+      })).sort((a, b) => ((a.label > b.label) ? 1 : -1)),
     };
     return chartData;
   };
