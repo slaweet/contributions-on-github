@@ -87,7 +87,15 @@
       "react": {
         "version": "detect"
       }
-    }
+    },
+    "overrides": [
+      {
+        "files": [ "*.test.js" ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [

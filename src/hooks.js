@@ -48,7 +48,6 @@ export function useCommits({
     fetchUrl();
     return function cleanup() {
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, repo, since, until]);
   return [commits, loading, error];
 }
