@@ -21,6 +21,7 @@ export function useCommits({
     };
   }
   async function fetchUrl(page = 1, prevCommits = []) {
+    setLoading(true);
     const [err, response] = await to(axios.get(
       `https://api.github.com/repos/${username}/${repo}/commits`, {
         params: { page, since, until },

@@ -1,5 +1,11 @@
 import {
-  Card, CardHeader, ListGroup, ListGroupItem,
+  Alert,
+  Card,
+  CardBody,
+  CardHeader,
+  ListGroup,
+  ListGroupItem,
+  Spinner,
 } from 'reactstrap';
 import { useQueryParam, StringParam, BooleanParam } from 'use-query-params';
 import Emoji from 'react-emoji-render';
@@ -25,15 +31,18 @@ export default function CommitsPage() {
   const config = {
     username, repo, since, until, showAvatarsAsPoints,
   };
-  const [commits] = useCommits(config);
+  const [commits, isLoading, error] = useCommits(config);
   return (
     <Card>
       <CardHeader>
+        { isLoading && <Spinner size="sm" color="secondary" />}
         {`${commits.length} commits in `}
         <a href={getRepoUrl({ username, repo })}>{`${username}/${repo}`}</a>
         {` from ${formatDate(since)} to ${formatDate(until)}`}
       </CardHeader>
-      <PunchChart commits={commits} config={config} />
+      {error
+        ? <CardBody><Alert color="danger">{`${error}`}</Alert></CardBody>
+        : <PunchChart commits={commits} config={config} />}
       <ListGroup>
         {commits.map(({
           sha, message, author, date,
