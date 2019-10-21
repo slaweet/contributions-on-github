@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 
-const getAvatarSrc = (id) => (
-  `https://avatars3.githubusercontent.com/u/${id}?s=20&v=4`
-);
+import { formatDate, getAvatarSrc } from './utils';
 
 const getPointStyle = (id) => {
   const myImage = new Image(20, 20);
@@ -15,7 +13,7 @@ const getPointStyle = (id) => {
   return myImage;
 };
 
-export default function PunchChart({ commits, config }) {
+export default function PunchChart({ config, commits }) {
   const data = () => {
     const chartData = {
       datasets: Object.values(commits.reduce((accumulator, commit) => ({
@@ -62,47 +60,16 @@ export default function PunchChart({ commits, config }) {
       yAxes: [{
         ticks: {
           stepSize: 1,
-          callback: (value) => moment().subtract(value, 'days').format('YYYY-MM-DD'),
+          callback: (value) => formatDate(moment().subtract(value, 'days')),
         },
       }],
     },
   };
 
-  return (
-    <div
-      style={{
-        width: '95vw',
-        height: '300px',
-      }}
-    >
-      <Bubble
-        data={data}
-        options={options}
-      />
-      <ul>
-        {commits.map(({
-          sha, message, author, date,
-        }) => (
-          <li key={sha}>
-            <a href={`https://github.com/${config.username}/${config.repo}/commit/${sha}`}>
-              {sha.substr(0, 6)}
-            </a>
-            {' '}
-             by
-            {' '}
-            <a href={`https://github.com/${author.login}`}>
-              <img src={getAvatarSrc(author.id)} alt="avatar" />
-              {` ${author.login}`}
-            </a>
-            {` ${moment(date)} : ${message}`}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <Bubble data={data} options={options} />;
 }
 
 PunchChart.propTypes = {
-  commits: PropTypes.arrayOf(PropTypes.shape).isRequired,
   config: PropTypes.shape().isRequired,
+  commits: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
