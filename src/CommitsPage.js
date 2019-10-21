@@ -44,9 +44,11 @@ export default function CommitsPage() {
         <a href={getRepoUrl({ username, repo })}>{`${username}/${repo}`}</a>
         {` from ${formatDate(since)} to ${formatDate(until)}`}
       </CardHeader>
-      {error
-        ? <CardBody><Alert color="danger">{`${error}`}</Alert></CardBody>
-        : <PunchChart commits={commits} config={config} />}
+      <CardBody>
+        {error
+          ? <Alert color="danger">{`${error}`}</Alert>
+          : <PunchChart commits={commits} config={config} />}
+      </CardBody>
       <ListGroup>
         {commits.map(({
           sha, message, author, date,
