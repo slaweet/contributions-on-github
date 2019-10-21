@@ -9,6 +9,7 @@ export function useCommits({
   const [commits, setCommits] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const githubToken = localStorage.getItem('githubToken');
 
   function transformCommit({ commit, author, sha }) {
     return {
@@ -24,7 +25,7 @@ export function useCommits({
       `https://api.github.com/repos/${username}/${repo}/commits`, {
         params: { page, since, until },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('githubToken')}`,
+          ...(githubToken && { Authorization: `Bearer ${githubToken}` }),
         },
       },
     ));
