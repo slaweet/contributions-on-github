@@ -22,8 +22,8 @@ import PunchChart from './PunchChart';
 
 
 export default function CommitsPage() {
-  const [repo = 'lisk-hub'] = useQueryParam('repo', StringParam);
-  const [username = 'LiskHQ'] = useQueryParam('username', StringParam);
+  const [repo] = useQueryParam('repo', StringParam);
+  const [username] = useQueryParam('username', StringParam);
   const [since = '2019-09-29T00:00:00+0000'] = useQueryParam('since', StringParam);
   const [until = '2019-10-11T00:00:00+0000'] = useQueryParam('until', StringParam);
   const [showAvatarsAsPoints = false] = useQueryParam('showAvatarsAsPoints', BooleanParam);

@@ -8,7 +8,7 @@ export function useCommits({
 }) {
   const [commits, setCommits] = useState([]);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const githubToken = localStorage.getItem('githubToken');
 
   function transformCommit({ commit, author, sha }) {
@@ -20,6 +20,15 @@ export function useCommits({
       comment_count: commit.comment_count,
     };
   }
+
+  function validateConfig() {
+    const isValid = !!repo && !!username;
+    if (!isValid) {
+      setError('Missing `repo` and/or `username` URL search param. e.g. `?repo=lisk-hub&username=LiskHQ`');
+    }
+    return isValid;
+  }
+
   async function fetchUrl(page = 1, prevCommits = []) {
     setLoading(true);
     const [err, response] = await to(axios.get(
@@ -47,7 +56,9 @@ export function useCommits({
   }
 
   useEffect(() => {
-    fetchUrl();
+    if (validateConfig()) {
+      fetchUrl();
+    }
     return function cleanup() {
     };
   }, [username, repo, since, until]);
