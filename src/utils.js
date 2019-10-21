@@ -1,5 +1,9 @@
 import moment from 'moment';
 
+export const getRepoUrl = ({ username, repo }) => (
+  `https://github.com/${username}/${repo}/`
+);
+
 export const getAvatarSrc = (id) => (
   `https://avatars3.githubusercontent.com/u/${id}?s=20&v=4`
 );

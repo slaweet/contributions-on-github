@@ -5,7 +5,12 @@ import { useQueryParam, StringParam, BooleanParam } from 'use-query-params';
 import Emoji from 'react-emoji-render';
 import React from 'react';
 
-import { formatDate, formatDateAndTime, getAvatarSrc } from './utils';
+import {
+  formatDate,
+  formatDateAndTime,
+  getAvatarSrc,
+  getRepoUrl,
+} from './utils';
 import { useCommits } from './hooks';
 import PunchChart from './PunchChart';
 
@@ -23,14 +28,18 @@ export default function CommitsPage() {
   const [commits] = useCommits(config);
   return (
     <Card>
-      <CardHeader>{`Commits of ${username}/${repo} from ${formatDate(since)} to ${formatDate(until)}`}</CardHeader>
+      <CardHeader>
+        {`${commits.length} commits in `}
+        <a href={getRepoUrl({ username, repo })}>{`${username}/${repo}`}</a>
+        {` from ${formatDate(since)} to ${formatDate(until)}`}
+      </CardHeader>
       <PunchChart commits={commits} config={config} />
       <ListGroup>
         {commits.map(({
           sha, message, author, date,
         }) => (
           <ListGroupItem key={sha}>
-            <a href={`https://github.com/${username}/${repo}/commit/${sha}`}>
+            <a href={`${getRepoUrl({ username, repo })}/commit/${sha}`}>
               {sha.substr(0, 6)}
             </a>
             {' '}
