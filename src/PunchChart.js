@@ -53,7 +53,6 @@ export default function PunchChart({ config, commits }) {
     scales: {
       xAxes: [{
         ticks: {
-          stepSize: 1,
           callback: (value) => `${value}:00`,
         },
       }],
@@ -61,6 +60,8 @@ export default function PunchChart({ config, commits }) {
         ticks: {
           stepSize: 1,
           callback: (value) => formatDate(moment().subtract(value, 'days')),
+          min: moment().diff(moment(config.until), 'days'),
+          max: moment().diff(moment(config.since), 'days'),
         },
       }],
     },
