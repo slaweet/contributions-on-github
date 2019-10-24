@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 
-import { formatDate, getAvatarSrc } from './utils';
+import { formatDate, getAvatarSrc, getRepoUrl } from './utils';
 
 const getPointStyle = (id) => {
   const myImage = new Image(20, 20);
@@ -40,6 +40,17 @@ export default function PunchChart({ config, commits }) {
   };
 
   const options = {
+    onClick(e) {
+      /* eslint-disable react/no-this-in-sfc */
+      // disable eslint because here this is not referring to this component but to chartjs
+      const element = this.getElementAtEvent(e)[0];
+      if (element) {
+        /* eslint-disable-next-line no-underscore-dangle */
+        const { commit } = this.config.data.datasets[element._datasetIndex].data[element._index];
+        window.open(`${getRepoUrl(config)}commit/${commit.sha}`, '_blank');
+      }
+      /* eslint-enable react/no-this-in-sfc */
+    },
     tooltips: {
       callbacks: {
         title(tooltipItem, _data) {
