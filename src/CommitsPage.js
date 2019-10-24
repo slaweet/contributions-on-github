@@ -19,6 +19,7 @@ import {
   getRepoUrl,
 } from './utils';
 import { useCommits } from './hooks';
+import ConfigFormButton from './ConfigFormButton';
 import PunchChart from './PunchChart';
 
 const formatEndOfDay = (date) => (
@@ -33,15 +34,18 @@ export default function CommitsPage() {
   const [showAvatarsAsPoints = false] = useQueryParam('showAvatarsAsPoints', BooleanParam);
 
   const config = {
-    username, repo, since: `${since}T00:00:00+0000`, until: `${until}T00:00:00+0000`, showAvatarsAsPoints,
+    username, repo, since, until, showAvatarsAsPoints,
   };
   const [commits, isLoading, error] = useCommits(config);
   return (
     <Card>
-      <CardHeader>
+      <CardHeader style={{ display: 'flex', alignItems: 'center' }}>
         { isLoading && <Spinner size="sm" color="secondary" />}
+        &nbsp;
         {` ${commits.length} commits in `}
-        <a href={getRepoUrl({ username, repo })}>{`${username}/${repo}`}</a>
+        &nbsp;
+        <ConfigFormButton config={config} />
+        &nbsp;
         {` from ${formatDate(since)} to ${formatDate(until)}`}
       </CardHeader>
       <CardBody>

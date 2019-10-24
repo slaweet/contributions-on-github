@@ -24,7 +24,7 @@ export function useCommits({
   function validateConfig() {
     const isValid = !!repo && !!username;
     if (!isValid) {
-      setError('Missing `repo` and/or `username` URL search param. e.g. `?repo=lisk-hub&username=LiskHQ`');
+      setError('Missing `repo` and/or `username` param. Please select them in the header dropdown');
     }
     return isValid;
   }
