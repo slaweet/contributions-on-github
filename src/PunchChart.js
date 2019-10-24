@@ -1,6 +1,7 @@
 import 'chartjs-plugin-colorschemes';
 
 import { Bubble } from 'react-chartjs-2';
+import { UncontrolledAlert } from 'reactstrap';
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
@@ -78,7 +79,14 @@ export default function PunchChart({ config, commits }) {
     },
   };
 
-  return <Bubble data={data} options={options} />;
+  return (
+    <>
+      <Bubble data={data} options={options} />
+      <UncontrolledAlert color="info">
+      Usage Tip: Try clicking usernames or points on the chart.
+      </UncontrolledAlert>
+    </>
+  );
 }
 
 PunchChart.propTypes = {
