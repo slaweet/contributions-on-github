@@ -17,7 +17,7 @@ export function useCommits({
   }) {
     return {
       author,
-      date: commit.committer.date,
+      date: commit.author.date,
       message: commit.message,
       messageHeadline: commit.message.split('\n')[0],
       sha,
