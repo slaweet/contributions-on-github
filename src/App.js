@@ -11,9 +11,9 @@ function App() {
   return (
     <Router>
       <QueryParamProvider ReactRouterRoute={Route}>
-        <Container>
+        <Container fluid>
           <Row>
-            <Col>
+            <Col xs="12">
               <CommitsPage />
             </Col>
           </Row>
