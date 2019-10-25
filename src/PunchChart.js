@@ -48,7 +48,7 @@ export default function PunchChart({ config, commits }) {
       if (element) {
         /* eslint-disable-next-line no-underscore-dangle */
         const { commit } = this.config.data.datasets[element._datasetIndex].data[element._index];
-        window.open(commit.url, '_blank');
+        window.open(commit.html_url, '_blank');
       }
       /* eslint-enable react/no-this-in-sfc */
     },

@@ -12,7 +12,8 @@ export function useCommits({
   const [loading, setLoading] = useState(false);
 
   function transformCommit({
-    commit, author, sha, url, committer,
+    // eslint-disable-next-line camelcase
+    commit, author, sha, html_url, committer,
   }) {
     return {
       author,
@@ -21,7 +22,7 @@ export function useCommits({
       messageHeadline: commit.message.split('\n')[0],
       sha,
       comment_count: commit.comment_count,
-      url,
+      html_url,
       committer,
     };
   }

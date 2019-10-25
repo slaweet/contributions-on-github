@@ -55,7 +55,7 @@ export default function CommitsPage() {
       </CardBody>
       <ListGroup>
         {commits.map(({
-          sha, messageHeadline, author, date, url, committer,
+          sha, messageHeadline, author, date, html_url, committer,
         }) => (
           <ListGroupItem key={sha} className="commitRow">
             <div>
@@ -72,7 +72,7 @@ export default function CommitsPage() {
                 {` committed on ${formatDateAndTime(date)} `}
               </div>
             </div>
-            <a href={url} target="_blank" rel="noopener noreferrer">
+            <a href={html_url} target="_blank" rel="noopener noreferrer">
               <Button>{sha.substr(0, 6)}</Button>
             </a>
           </ListGroupItem>
