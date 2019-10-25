@@ -1,10 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
 
-export const getRepoUrl = ({ username, repo }) => (
-  `https://github.com/${username}/${repo}/`
-);
-
 export const formatDate = (date) => moment(date).format('YYYY-MM-DD');
 
 export const formatDateAndTime = (date) => moment(date).format('YYYY-MM-DD HH:mm');

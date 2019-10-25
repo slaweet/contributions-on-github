@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 
-import { formatDate, getAvatarSrc, getRepoUrl } from './utils';
+import { formatDate } from './utils';
 
-const getPointStyle = (id) => {
+const getPointStyle = (committer) => {
   const myImage = new Image(20, 20);
-  myImage.src = getAvatarSrc(id);
+  myImage.src = committer.avatar_url;
   return myImage;
 };
 
@@ -30,11 +30,11 @@ export default function PunchChart({ config, commits }) {
             },
           ],
           label: commit.author.login,
-          id: commit.author.id,
+          committer: commit.committer,
         },
-      }), {})).map(({ id, ...dataset }) => ({
+      }), {})).map(({ committer, ...dataset }) => ({
         ...dataset,
-        ...(config.showAvatarsAsPoints ? { pointStyle: getPointStyle(id) } : {}),
+        ...(config.showAvatarsAsPoints ? { pointStyle: getPointStyle(committer) } : {}),
       })).sort((a, b) => ((a.label > b.label) ? 1 : -1)),
     };
     return chartData;
@@ -48,7 +48,7 @@ export default function PunchChart({ config, commits }) {
       if (element) {
         /* eslint-disable-next-line no-underscore-dangle */
         const { commit } = this.config.data.datasets[element._datasetIndex].data[element._index];
-        window.open(`${getRepoUrl(config)}commit/${commit.sha}`, '_blank');
+        window.open(commit.url, '_blank');
       }
       /* eslint-enable react/no-this-in-sfc */
     },
@@ -58,7 +58,7 @@ export default function PunchChart({ config, commits }) {
           return _data.labels[tooltipItem[0].index];
         },
         label(tooltipItem, _data) {
-          return _data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].commit.message;
+          return _data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].commit.messageHeadline;
         },
       },
     },
