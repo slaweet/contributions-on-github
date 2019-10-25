@@ -24,7 +24,7 @@ export default function PunchChart({ config, commits }) {
             ...(accumulator[commit.author.login] || { data: [] }).data,
             {
               x: moment(commit.date).hour() + moment(commit.date).minute() / 60,
-              y: moment().diff(moment(commit.date), 'days'),
+              y: moment().startOf('day').diff(moment(commit.date).startOf('day'), 'days'),
               r: commit.comment_count + 5,
               commit,
             },
@@ -58,7 +58,8 @@ export default function PunchChart({ config, commits }) {
           return _data.labels[tooltipItem[0].index];
         },
         label(tooltipItem, _data) {
-          return _data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].commit.messageHeadline;
+          return _data.datasets[tooltipItem.datasetIndex]
+            .data[tooltipItem.index].commit.messageHeadline;
         },
       },
     },
@@ -72,8 +73,8 @@ export default function PunchChart({ config, commits }) {
         ticks: {
           stepSize: 1,
           callback: (value) => formatDate(moment().subtract(value, 'days')),
-          min: moment().diff(moment(config.until), 'days'),
-          max: moment().diff(moment(config.since), 'days'),
+          min: moment().startOf('day').diff(moment(config.until).startOf('day'), 'days') - 1,
+          max: moment().startOf('day').diff(moment(config.since).startOf('day'), 'days'),
         },
       }],
     },
