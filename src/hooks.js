@@ -11,13 +11,18 @@ export function useCommits({
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  function transformCommit({ commit, author, sha }) {
+  function transformCommit({
+    commit, author, sha, url, committer,
+  }) {
     return {
-      author: { login: author.login, id: author.id },
+      author,
       date: commit.committer.date,
       message: commit.message,
+      messageHeadline: commit.message.split('\n')[0],
       sha,
       comment_count: commit.comment_count,
+      url,
+      committer,
     };
   }
 

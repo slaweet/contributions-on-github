@@ -1,5 +1,6 @@
 import {
   Alert,
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -11,12 +12,11 @@ import { useQueryParam, StringParam, BooleanParam } from 'use-query-params';
 import Emoji from 'react-emoji-render';
 import React from 'react';
 import moment from 'moment';
+import './CommitsPage.css';
 
 import {
   formatDate,
   formatDateAndTime,
-  getAvatarSrc,
-  getRepoUrl,
 } from './utils';
 import { useCommits } from './hooks';
 import ConfigFormButton from './ConfigFormButton';
@@ -55,21 +55,26 @@ export default function CommitsPage() {
       </CardBody>
       <ListGroup>
         {commits.map(({
-          sha, message, author, date,
+          sha, messageHeadline, author, date, url, committer,
         }) => (
-          <ListGroupItem key={sha}>
-            <a href={`${getRepoUrl({ username, repo })}/commit/${sha}`}>
-              {sha.substr(0, 6)}
+          <ListGroupItem key={sha} className="commitRow">
+            <div>
+              <div>
+                <strong>
+                  <Emoji text={messageHeadline} />
+                </strong>
+              </div>
+              <div>
+                <a href={committer.html_url} target="_blank" rel="noopener noreferrer">
+                  <img src={committer.avatar_url} alt="avatar" className="avatar" />
+                  {` ${author.login}`}
+                </a>
+                {` committed on ${formatDateAndTime(date)} `}
+              </div>
+            </div>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <Button>{sha.substr(0, 6)}</Button>
             </a>
-            {' '}
-             by
-            {' '}
-            <a href={`https://github.com/${author.login}`}>
-              <img src={getAvatarSrc(author.id)} alt="avatar" />
-              {` ${author.login}`}
-            </a>
-            {` ${formatDateAndTime(date)} `}
-            <Emoji text={message} />
           </ListGroupItem>
         ))}
       </ListGroup>
