@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/slaweet/github-commit-punch-chart.svg?style=svg)](https://circleci.com/gh/slaweet/github-commit-punch-chart)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b8558fe125761efc8eae/maintainability)](https://codeclimate.com/github/slaweet/github-commit-punch-chart/maintainability)
 [![Dependencies Status](https://david-dm.org/slaweet/github-commit-punch-chart/status.svg)](https://david-dm.org/slaweet/github-commit-punch-chart)
 [![devDependencies Status](https://david-dm.org/slaweet/github-commit-punch-chart/dev-status.svg)](https://david-dm.org/slaweet/github-commit-punch-chart?type=dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
