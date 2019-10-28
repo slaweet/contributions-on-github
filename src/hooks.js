@@ -1,9 +1,26 @@
 import { to } from 'await-to-js';
+import { useQueryParam, StringParam, BooleanParam } from 'use-query-params';
 import { useState, useEffect } from 'react';
+import moment from 'moment';
 
 import { getCommits } from './utils';
 
-// eslint-disable-next-line import/prefer-default-export
+const formatEndOfDay = (date) => (
+  date.endOf('day').toISOString().substr(0, 10)
+);
+
+export function useQueryParamConfig() {
+  const [repo] = useQueryParam('repo', StringParam);
+  const [username] = useQueryParam('username', StringParam);
+  const [since = formatEndOfDay(moment().subtract(14, 'days'))] = useQueryParam('since', StringParam);
+  const [until = formatEndOfDay(moment())] = useQueryParam('until', StringParam);
+  const [showAvatarsAsPoints = false] = useQueryParam('showAvatarsAsPoints', BooleanParam);
+
+  return [{
+    username, repo, since, until, showAvatarsAsPoints,
+  }];
+}
+
 export function useCommits({
   username, repo, since, until,
 }) {
