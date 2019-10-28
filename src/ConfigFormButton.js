@@ -12,31 +12,44 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function ConfigFormButton({
-  config: {
-    username, repo, since, until,
-  },
+  config,
 }) {
+  const inputs = [{
+    name: 'username',
+    placeholder: 'E.g. LiskHQ',
+    label: 'Username or Organization',
+  }, {
+    name: 'repo',
+    placeholder: 'E.g. lisk-hub',
+    label: 'Repository name',
+  }, {
+    name: 'since',
+    label: 'From date',
+    type: 'date',
+  }, {
+    name: 'until',
+    label: 'Until date',
+    type: 'date',
+  }];
   return (
     <UncontrolledButtonDropdown style={{ display: 'iniline-block' }}>
-      <DropdownToggle caret size="md">{`${username}/${repo}`}</DropdownToggle>
+      <DropdownToggle caret size="md">{`${config.username}/${config.repo}`}</DropdownToggle>
       <DropdownMenu right>
         <Form style={{ padding: 16, width: 300 }}>
-          <FormGroup>
-            <Label for="username">Username or Organization</Label>
-            <Input defaultValue={username} name="username" placeholder="E.g. LiskHQ" required />
-          </FormGroup>
-          <FormGroup>
-            <Label for="repo">Repository name</Label>
-            <Input defaultValue={repo} name="repo" placeholder="E.g. lisk-hub" required />
-          </FormGroup>
-          <FormGroup>
-            <Label for="since">From date</Label>
-            <Input defaultValue={since} name="since" type="date" required />
-          </FormGroup>
-          <FormGroup>
-            <Label for="until">Until date</Label>
-            <Input defaultValue={until} name="until" type="date" required />
-          </FormGroup>
+          {inputs.map(({
+            name, placeholder, label, type,
+          }) => (
+            <FormGroup key={name}>
+              <Label for={name}>{label}</Label>
+              <Input
+                defaultValue={config[name]}
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                required
+              />
+            </FormGroup>
+          ))}
           <Button color="primary" block>Update</Button>
         </Form>
       </DropdownMenu>
