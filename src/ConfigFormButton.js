@@ -17,7 +17,7 @@ function ConfigFormButton({
   },
 }) {
   return (
-    <UncontrolledButtonDropdown>
+    <UncontrolledButtonDropdown style={{ display: 'iniline-block' }}>
       <DropdownToggle caret size="md">{`${username}/${repo}`}</DropdownToggle>
       <DropdownMenu right>
         <Form style={{ padding: 16, width: 300 }}>

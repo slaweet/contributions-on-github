@@ -39,13 +39,11 @@ export default function CommitsPage() {
   const [commits, isLoading, error] = useCommits(config);
   return (
     <Card>
-      <CardHeader style={{ display: 'flex', alignItems: 'center' }}>
+      <CardHeader>
         { isLoading && <Spinner size="sm" color="secondary" />}
         &nbsp;
         {` ${commits.length} commits in `}
-        &nbsp;
         <ConfigFormButton config={config} />
-        &nbsp;
         {` from ${formatDate(since)} to ${formatDate(until)}`}
       </CardHeader>
       <CardBody>

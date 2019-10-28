@@ -78,11 +78,14 @@ export default function PunchChart({ config, commits }) {
         },
       }],
     },
+    maintainAspectRatio: false,
   };
 
   return (
     <>
-      <Bubble data={data} options={options} />
+      <div style={{ height: 500 }}>
+        <Bubble data={data} options={options} />
+      </div>
       <UncontrolledAlert color="info">
       Usage Tip: Try clicking usernames or points on the chart.
       </UncontrolledAlert>
