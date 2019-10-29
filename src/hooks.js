@@ -10,8 +10,8 @@ const formatEndOfDay = (date) => (
 );
 
 export function useQueryParamConfig() {
-  const [repo] = useQueryParam('repo', StringParam);
-  const [username] = useQueryParam('username', StringParam);
+  const [repo = ''] = useQueryParam('repo', StringParam);
+  const [username = ''] = useQueryParam('username', StringParam);
   const [since = formatEndOfDay(moment().subtract(14, 'days'))] = useQueryParam('since', StringParam);
   const [until = formatEndOfDay(moment())] = useQueryParam('until', StringParam);
   const [showAvatarsAsPoints = false] = useQueryParam('showAvatarsAsPoints', BooleanParam);
