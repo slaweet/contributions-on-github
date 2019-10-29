@@ -1,5 +1,6 @@
 orbs:
   react: "thefrontside/react@0.2.0"
+  codecov: codecov/codecov@1.0.5
 version: 2.1
 workflows:
   push:
@@ -11,6 +12,18 @@ workflows:
       - react/test:
           requires:
             - react/install
-      - react/coverage:
+      - coverage:
           requires:
             - react/install
+jobs:
+  coverage:
+    executor: react/default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - react/coverage
+      - store_artifacts:
+          path: ./artifacts
+      - codecov/upload:
+          file: artifacts/coverage/coverage-final.json
+

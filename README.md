@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/slaweet/github-commit-punch-chart.svg?style=shield)](https://circleci.com/gh/slaweet/github-commit-punch-chart)
+[![codecov](https://codecov.io/gh/slaweet/github-commit-punch-chart/branch/master/graph/badge.svg)](https://codecov.io/gh/slaweet/github-commit-punch-chart)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b8558fe125761efc8eae/maintainability)](https://codeclimate.com/github/slaweet/github-commit-punch-chart/maintainability)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/slaweet/github-commit-punch-chart.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/slaweet/github-commit-punch-chart/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/slaweet/github-commit-punch-chart.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/slaweet/github-commit-punch-chart/context:javascript)
