@@ -7,8 +7,13 @@ import React from 'react';
 
 import { formatDateAndTime } from './utils';
 
+import { Commit } from './types';
 
-export default function CommitsList({ commits }) {
+type CommitsListProps = {
+  commits: Commit[],
+}
+
+export default function CommitsList({ commits }: CommitsListProps) {
   return (
     <ListGroup>
       {commits.map(({
@@ -39,7 +44,7 @@ export default function CommitsList({ commits }) {
 }
 
 CommitsList.propTypes = {
-  commits: PropTypes.arrayOf(PropTypes.shape()),
+  commits: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 CommitsList.defaultProps = {

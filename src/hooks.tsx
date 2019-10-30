@@ -37,9 +37,16 @@ function transformCommit({
   };
 }
 
+type Config = {
+  username: string, 
+  repo: string,
+  since: string,
+  until: string,
+};
+
 export function useCommits({
   username, repo, since, until,
-}) {
+}: Config) {
   const [commits, setCommits] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
