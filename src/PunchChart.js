@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import { formatDate } from './utils';
 
+/* istanbul ignore next */ // this is just an experimental feature
 const getPointStyle = (committer) => {
   const myImage = new Image(20, 20);
   myImage.src = committer.avatar_url;
@@ -41,6 +42,7 @@ export default function PunchChart({ config, commits }) {
   };
 
   const options = {
+    /* istanbul ignore next */ // chart onClick is not a crucial feature
     onClick(e) {
       /* eslint-disable react/no-this-in-sfc */
       // disable eslint because here this is not referring to this component but to chartjs
@@ -54,9 +56,11 @@ export default function PunchChart({ config, commits }) {
     },
     tooltips: {
       callbacks: {
+        /* istanbul ignore next */ // chart tooltips are not a crucial feature
         title(tooltipItem, _data) {
           return _data.labels[tooltipItem[0].index];
         },
+        /* istanbul ignore next */ // chart tooltips are not a crucial feature
         label(tooltipItem, _data) {
           return _data.datasets[tooltipItem.datasetIndex]
             .data[tooltipItem.index].commit.messageHeadline;

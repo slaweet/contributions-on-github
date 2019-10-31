@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+// ignore test coverage since this file is just setup with no logic
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './index.css';
