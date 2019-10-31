@@ -1,5 +1,3 @@
-import './App.css';
-
 import { Col, Container, Row } from 'reactstrap';
 import { QueryParamProvider } from 'use-query-params';
 import { Route } from 'react-router-dom';
