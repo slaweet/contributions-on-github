@@ -6,6 +6,7 @@
 [![Dependencies Status](https://david-dm.org/slaweet/github-commit-punch-chart/status.svg)](https://david-dm.org/slaweet/github-commit-punch-chart)
 [![devDependencies Status](https://david-dm.org/slaweet/github-commit-punch-chart/dev-status.svg)](https://david-dm.org/slaweet/github-commit-punch-chart?type=dev)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![JavaScript Style Guide: AirBnB](https://img.shields.io/badge/code%20style-airbnb-brightgreen.svg)](https://github.com/airbnb/javascript "AirBnB Style guide")
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # github-commit-punch-chart
