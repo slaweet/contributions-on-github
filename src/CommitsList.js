@@ -9,10 +9,14 @@ import { formatDateAndTime } from './utils';
 
 
 export default function CommitsList({ commits }) {
+  const actions = {
+    pr: 'created',
+    commit: 'committed',
+  };
   return (
     <ListGroup>
       {commits.map(({
-        sha, messageHeadline, author, date, html_url: url, committer,
+        sha, messageHeadline, author, date, html_url: url, committer, type,
       }) => (
         <ListGroupItem key={sha} className="commitRow">
           <div>
@@ -26,7 +30,7 @@ export default function CommitsList({ commits }) {
                 <img src={committer.avatar_url} alt="avatar" className="avatar" />
                 {` ${author.login}`}
               </a>
-              {` committed on ${formatDateAndTime(date)} `}
+              {` ${actions[type]} on ${formatDateAndTime(date)} `}
             </div>
           </div>
           <a href={url} target="_blank" rel="noopener noreferrer">

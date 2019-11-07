@@ -26,7 +26,7 @@ export default function PunchChart({ config, commits }) {
             {
               x: moment(commit.date).hour() + moment(commit.date).minute() / 60,
               y: moment().startOf('day').diff(moment(commit.date).startOf('day'), 'days'),
-              r: commit.comment_count + 5,
+              r: { pr: 10, commit: 5 }[commit.type] || 5,
               commit,
             },
           ],

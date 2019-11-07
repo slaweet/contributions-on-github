@@ -3,7 +3,7 @@ import { useQueryParam, StringParam, BooleanParam } from 'use-query-params';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 
-import { getCommits } from './utils';
+import { getCommits, getPullRequests } from './utils';
 
 const formatEndOfDay = (date) => (
   date.endOf('day').toISOString().substr(0, 10)
@@ -34,6 +34,7 @@ function transformCommit({
     comment_count: commit.comment_count,
     html_url,
     committer,
+    type: 'commit',
   };
 }
 
@@ -78,4 +79,64 @@ export function useCommits({
     }
   }, [username, repo, since, until]);
   return [commits, loading, error];
+}
+
+function transformPullRequest({
+  // eslint-disable-next-line camelcase
+  user, number, html_url, created_at, title,
+}) {
+  return {
+    author: user,
+    date: created_at,
+    message: title,
+    messageHeadline: title,
+    sha: `#${number}`,
+    comment_count: 0,
+    html_url,
+    committer: user,
+    type: 'pr',
+  };
+}
+
+export function usePullRequests({
+  username, repo, since, until,
+}) {
+  const [pullRequests, setPRs] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    function validateConfig() {
+      const isValid = !!repo && !!username;
+      if (!isValid) {
+        setError('Missing `repo` and/or `username` param. Please select them in the header dropdown');
+      }
+      return isValid;
+    }
+
+    async function fetchUrl(page = 1, prevPullRequests = []) {
+      setLoading(true);
+      const [err, response] = await to(getPullRequests({
+        repo, username, page, since, until,
+      }));
+      setLoading(false);
+      if (err) {
+        setError(err);
+      } else {
+        const currentPullRequests = [
+          ...prevPullRequests,
+          ...response.data.map(transformPullRequest).filter(
+            ({ sha }) => !prevPullRequests.some((c) => c.sha === sha),
+          )];
+        setPRs(currentPullRequests);
+        if (response.data.length === 30) {
+          fetchUrl(page + 1, currentPullRequests);
+        }
+      }
+    }
+    if (validateConfig()) {
+      fetchUrl();
+    }
+  }, [username, repo, since, until]);
+  return [pullRequests, loading, error];
 }

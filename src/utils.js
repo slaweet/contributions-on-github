@@ -17,3 +17,21 @@ export const getCommits = ({
     },
   },
 );
+
+export const getPullRequests = async ({
+  username, repo, page, since, until,
+}) => {
+  const response = await axios.get(
+    `https://api.github.com/repos/${username}/${repo}/pulls`, {
+      params: { page, state: 'closed' },
+      headers: {
+        ...(githubToken && { Authorization: `Bearer ${githubToken}` }),
+      },
+    },
+  );
+  response.data = response.data.filter((pr) => (
+    (moment(pr.created_at).isAfter(since))
+    && moment(pr.created_at).isBefore(until)
+  ));
+  return response;
+};

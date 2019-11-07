@@ -4,7 +4,7 @@ import {
 import React from 'react';
 
 import { formatDate } from './utils';
-import { useCommits, useQueryParamConfig } from './hooks';
+import { useCommits, usePullRequests, useQueryParamConfig } from './hooks';
 import CommitsList from './CommitsList';
 import ConfigFormButton from './ConfigFormButton';
 import PunchChart from './PunchChart';
@@ -12,11 +12,14 @@ import PunchChart from './PunchChart';
 export default function CommitsPage() {
   const [config] = useQueryParamConfig();
   const [commits, isLoading, error] = useCommits(config);
+  const [pullRequests] = usePullRequests(config);
+  const events = [...pullRequests, ...commits];
   return (
     <Card>
       <CardHeader>
         { isLoading && <Spinner size="sm" color="secondary" />}
         &nbsp;
+        {` ${pullRequests.length} PRs and `}
         {` ${commits.length} commits in `}
         <ConfigFormButton config={config} />
         {` from ${formatDate(config.since)} to ${formatDate(config.until)}`}
@@ -24,9 +27,9 @@ export default function CommitsPage() {
       <CardBody>
         {error
           ? <Alert color="danger">{`${error}`}</Alert>
-          : <PunchChart commits={commits} config={config} />}
+          : <PunchChart commits={events} config={config} />}
       </CardBody>
-      <CommitsList commits={commits} />
+      <CommitsList commits={events} />
     </Card>
   );
 }
