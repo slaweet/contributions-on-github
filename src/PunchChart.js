@@ -9,9 +9,9 @@ import moment from 'moment';
 import { formatDate } from './utils';
 
 /* istanbul ignore next */ // this is just an experimental feature
-const getPointStyle = (committer) => {
+const getPointStyle = (user) => {
   const myImage = new Image(20, 20);
-  myImage.src = committer.avatar_url;
+  myImage.src = user.avatar_url;
   return myImage;
 };
 
@@ -20,9 +20,9 @@ export default function PunchChart({ config, commits }) {
     const chartData = {
       datasets: Object.values(commits.reduce((accumulator, commit) => ({
         ...accumulator,
-        [commit.author.login]: {
+        [commit.user.login]: {
           data: [
-            ...(accumulator[commit.author.login] || { data: [] }).data,
+            ...(accumulator[commit.user.login] || { data: [] }).data,
             {
               x: moment(commit.date).hour() + moment(commit.date).minute() / 60,
               y: moment().startOf('day').diff(moment(commit.date).startOf('day'), 'days'),
@@ -30,12 +30,12 @@ export default function PunchChart({ config, commits }) {
               commit,
             },
           ],
-          label: commit.author.login,
-          committer: commit.committer,
+          label: commit.user.login,
+          user: commit.user,
         },
-      }), {})).map(({ committer, ...dataset }) => ({
+      }), {})).map(({ user, ...dataset }) => ({
         ...dataset,
-        ...(config.showAvatarsAsPoints ? { pointStyle: getPointStyle(committer) } : {}),
+        ...(config.showAvatarsAsPoints ? { pointStyle: getPointStyle(user) } : {}),
       })).sort((a, b) => ((a.label > b.label) ? 1 : -1)),
     };
     return chartData;

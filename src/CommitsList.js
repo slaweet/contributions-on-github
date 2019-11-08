@@ -16,9 +16,9 @@ export default function CommitsList({ commits }) {
   return (
     <ListGroup>
       {commits.map(({
-        sha, messageHeadline, author, date, html_url: url, committer, type,
+        id, messageHeadline, date, html_url: url, user, type,
       }) => (
-        <ListGroupItem key={sha} className="commitRow">
+        <ListGroupItem key={id} className="commitRow">
           <div>
             <div>
               <strong>
@@ -26,15 +26,15 @@ export default function CommitsList({ commits }) {
               </strong>
             </div>
             <div>
-              <a href={committer.html_url} target="_blank" rel="noopener noreferrer">
-                <img src={committer.avatar_url} alt="avatar" className="avatar" />
-                {` ${author.login}`}
+              <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                <img src={user.avatar_url} alt="avatar" className="avatar" />
+                {` ${user.login}`}
               </a>
               {` ${actions[type]} on ${formatDateAndTime(date)} `}
             </div>
           </div>
           <a href={url} target="_blank" rel="noopener noreferrer">
-            <Button>{sha.substr(0, 6)}</Button>
+            <Button>{id.substr(0, 6)}</Button>
           </a>
         </ListGroupItem>
       ))}
