@@ -7,6 +7,7 @@ import { render, act } from '@testing-library/react';
 
 import App from './App';
 import commitsApiReponse from '../test/mocks/commitsApiReponse';
+import pullRequestsApiResponse from '../test/mocks/pullRequestsApiResponse';
 
 function renderWithRouter(
   ui,
@@ -33,14 +34,18 @@ describe('App', () => {
     expect(container.innerHTML).toContain('0 commits');
   });
 
-  it('renders commits page with 2 commits from the api', async () => {
+  it('renders with 2 commits and 1 PR from the api', async () => {
     jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve(
       { data: commitsApiReponse },
+    ));
+    jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve(
+      { data: pullRequestsApiResponse },
     ));
     let wrapper;
     await act(async () => {
       wrapper = renderWithRouter(<App />, { route });
     });
     expect(wrapper.container.innerHTML).toContain('2 commits');
+    expect(wrapper.container.innerHTML).toContain('1 PRs');
   });
 });
