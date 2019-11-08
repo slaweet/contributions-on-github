@@ -5,7 +5,7 @@ import { QueryParamProvider } from 'use-query-params';
 import { Route } from 'react-router-dom';
 import React from 'react';
 
-import CommitsPage from './CommitsPage';
+import EventsPage from './EventsPage';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Container fluid>
         <Row>
           <Col xs="12">
-            <CommitsPage />
+            <EventsPage />
           </Col>
         </Row>
       </Container>

@@ -1,4 +1,4 @@
-import './CommitsList.css';
+import './EventsList.css';
 
 import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 import Emoji from 'react-emoji-render';
@@ -8,7 +8,7 @@ import React from 'react';
 import { formatDateAndTime } from './utils';
 
 
-export default function CommitsList({ events }) {
+export default function EventsList({ events }) {
   const actionLabels = {
     pr: 'created',
     commit: 'committed',
@@ -18,7 +18,7 @@ export default function CommitsList({ events }) {
       {events.map(({
         id, messageHeadline, date, html_url: url, user, type,
       }) => (
-        <ListGroupItem key={id} className="commitRow">
+        <ListGroupItem key={id} className="eventRow">
           <div>
             <div>
               <strong>
@@ -42,10 +42,10 @@ export default function CommitsList({ events }) {
   );
 }
 
-CommitsList.propTypes = {
+EventsList.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape()),
 };
 
-CommitsList.defaultProps = {
+EventsList.defaultProps = {
   events: [],
 };

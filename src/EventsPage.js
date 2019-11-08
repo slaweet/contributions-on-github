@@ -5,11 +5,11 @@ import React from 'react';
 
 import { formatDate } from './utils';
 import { useCommits, usePullRequests, useQueryParamConfig } from './hooks';
-import CommitsList from './CommitsList';
 import ConfigFormButton from './ConfigFormButton';
+import EventsList from './EventsList';
 import PunchChart from './PunchChart';
 
-export default function CommitsPage() {
+export default function EventsPage() {
   const [config] = useQueryParamConfig();
   const [commits, isLoading, error] = useCommits(config);
   const [pullRequests] = usePullRequests(config);
@@ -29,7 +29,7 @@ export default function CommitsPage() {
           ? <Alert color="danger">{`${error}`}</Alert>
           : <PunchChart events={events} config={config} />}
       </CardBody>
-      <CommitsList events={events} />
+      <EventsList events={events} />
     </Card>
   );
 }
