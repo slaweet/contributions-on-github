@@ -33,7 +33,7 @@ function ConfigFormButton({
   }];
   return (
     <UncontrolledButtonDropdown style={{ display: 'iniline-block' }}>
-      <DropdownToggle caret size="md">{`${config.username}/${config.repo}`}</DropdownToggle>
+      <DropdownToggle caret size="sm">{`${config.username}/${config.repo}`}</DropdownToggle>
       <DropdownMenu right>
         <Form style={{ padding: 16, width: 300 }}>
           {inputs.map(({
