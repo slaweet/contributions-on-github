@@ -27,9 +27,9 @@ export default function CommitsPage() {
       <CardBody>
         {error
           ? <Alert color="danger">{`${error}`}</Alert>
-          : <PunchChart commits={events} config={config} />}
+          : <PunchChart events={events} config={config} />}
       </CardBody>
-      <CommitsList commits={events} />
+      <CommitsList events={events} />
     </Card>
   );
 }

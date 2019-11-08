@@ -15,23 +15,23 @@ const getPointStyle = (user) => {
   return myImage;
 };
 
-export default function PunchChart({ config, commits }) {
+export default function PunchChart({ config, events }) {
   const data = () => {
     const chartData = {
-      datasets: Object.values(commits.reduce((accumulator, commit) => ({
+      datasets: Object.values(events.reduce((accumulator, event) => ({
         ...accumulator,
-        [commit.user.login]: {
+        [event.user.login]: {
           data: [
-            ...(accumulator[commit.user.login] || { data: [] }).data,
+            ...(accumulator[event.user.login] || { data: [] }).data,
             {
-              x: moment(commit.date).hour() + moment(commit.date).minute() / 60,
-              y: moment().startOf('day').diff(moment(commit.date).startOf('day'), 'days'),
-              r: { pr: 10, commit: 5 }[commit.type] || 5,
-              commit,
+              x: moment(event.date).hour() + moment(event.date).minute() / 60,
+              y: moment().startOf('day').diff(moment(event.date).startOf('day'), 'days'),
+              r: { pr: 10, event: 5 }[event.type] || 5,
+              event,
             },
           ],
-          label: commit.user.login,
-          user: commit.user,
+          label: event.user.login,
+          user: event.user,
         },
       }), {})).map(({ user, ...dataset }) => ({
         ...dataset,
@@ -49,8 +49,8 @@ export default function PunchChart({ config, commits }) {
       const element = this.getElementAtEvent(e)[0];
       if (element) {
         /* eslint-disable-next-line no-underscore-dangle */
-        const { commit } = this.config.data.datasets[element._datasetIndex].data[element._index];
-        window.open(commit.html_url, '_blank');
+        const { event } = this.config.data.datasets[element._datasetIndex].data[element._index];
+        window.open(event.html_url, '_blank');
       }
       /* eslint-enable react/no-this-in-sfc */
     },
@@ -63,7 +63,7 @@ export default function PunchChart({ config, commits }) {
         /* istanbul ignore next */ // chart tooltips are not a crucial feature
         label(tooltipItem, _data) {
           return _data.datasets[tooltipItem.datasetIndex]
-            .data[tooltipItem.index].commit.messageHeadline;
+            .data[tooltipItem.index].event.messageHeadline;
         },
       },
     },
@@ -99,5 +99,5 @@ export default function PunchChart({ config, commits }) {
 
 PunchChart.propTypes = {
   config: PropTypes.shape().isRequired,
-  commits: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  events: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };

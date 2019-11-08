@@ -8,14 +8,14 @@ import React from 'react';
 import { formatDateAndTime } from './utils';
 
 
-export default function CommitsList({ commits }) {
-  const actions = {
+export default function CommitsList({ events }) {
+  const actionLabels = {
     pr: 'created',
     commit: 'committed',
   };
   return (
     <ListGroup>
-      {commits.map(({
+      {events.map(({
         id, messageHeadline, date, html_url: url, user, type,
       }) => (
         <ListGroupItem key={id} className="commitRow">
@@ -30,7 +30,7 @@ export default function CommitsList({ commits }) {
                 <img src={user.avatar_url} alt="avatar" className="avatar" />
                 {` ${user.login}`}
               </a>
-              {` ${actions[type]} on ${formatDateAndTime(date)} `}
+              {` ${actionLabels[type]} on ${formatDateAndTime(date)} `}
             </div>
           </div>
           <a href={url} target="_blank" rel="noopener noreferrer">
@@ -43,9 +43,9 @@ export default function CommitsList({ commits }) {
 }
 
 CommitsList.propTypes = {
-  commits: PropTypes.arrayOf(PropTypes.shape()),
+  events: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 CommitsList.defaultProps = {
-  commits: [],
+  events: [],
 };
