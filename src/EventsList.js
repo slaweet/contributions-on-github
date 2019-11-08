@@ -12,6 +12,7 @@ export default function EventsList({ events }) {
   const actionLabels = {
     pr: 'created',
     commit: 'committed',
+    comment: 'commented',
   };
   return (
     <ListGroup>

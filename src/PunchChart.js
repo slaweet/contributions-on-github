@@ -26,7 +26,7 @@ export default function PunchChart({ config, events }) {
             {
               x: moment(event.date).hour() + moment(event.date).minute() / 60,
               y: moment().startOf('day').diff(moment(event.date).startOf('day'), 'days'),
-              r: { pr: 10, event: 5 }[event.type] || 5,
+              r: { pr: 10, commit: 5 }[event.type] || 3,
               event,
             },
           ],

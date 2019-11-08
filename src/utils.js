@@ -70,3 +70,31 @@ export const getPullRequests = async ({
   ));
   return response;
 };
+
+function transformComment({
+  // eslint-disable-next-line camelcase
+  user, id, html_url, created_at, body,
+}) {
+  return {
+    date: created_at,
+    message: body,
+    messageHeadline: body.substr(0, 100),
+    id: `${id}`,
+    html_url,
+    user,
+    type: 'comment',
+  };
+}
+
+export const getComments = async ({
+  username, repo, page, since, until, pr,
+}) => {
+  const response = await getFromGithub(`/pulls/${pr.id.substr(1)}/comments`, {
+    username, repo, page,
+  });
+  response.data = response.data.map(transformComment).filter((comment) => (
+    (moment(comment.date).isAfter(since))
+    && moment(comment.date).isBefore(until)
+  ));
+  return response;
+};

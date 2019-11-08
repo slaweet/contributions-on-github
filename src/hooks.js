@@ -3,7 +3,7 @@ import { useQueryParam, StringParam, BooleanParam } from 'use-query-params';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 
-import { getCommits, getPullRequests } from './utils';
+import { getComments, getCommits, getPullRequests } from './utils';
 
 const formatEndOfDay = (date) => (
   date.endOf('day').toISOString().substr(0, 10)
@@ -70,4 +70,35 @@ export function useCommits(config) {
 
 export function usePullRequests(config) {
   return useEvents(config, getPullRequests);
+}
+
+export function useComments({
+  username, repo, since, until,
+}, pulls) {
+  const [comments, setComments] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchUrl(page = 0, prevEvents = []) {
+      setLoading(true);
+      const [err, response] = await to(getComments({
+        repo, username, since, until, pr: pulls[page],
+      }));
+      setLoading(false);
+      if (err) {
+        setError(err);
+      } else {
+        const currentComments = [...prevEvents, ...response.data];
+        setComments(currentComments);
+        if (pulls[page + 1]) {
+          fetchUrl(page + 1, currentComments);
+        }
+      }
+    }
+    if (pulls.length > 0) {
+      fetchUrl();
+    }
+  }, [username, repo, since, until, pulls]);
+  return [comments, loading, error];
 }
