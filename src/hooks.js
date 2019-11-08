@@ -21,21 +21,6 @@ export function useQueryParamConfig() {
   }];
 }
 
-function transformCommit({
-  // eslint-disable-next-line camelcase
-  commit, author, sha, html_url,
-}) {
-  return {
-    date: commit.author.date,
-    message: commit.message,
-    messageHeadline: commit.message.split('\n')[0],
-    id: sha,
-    html_url,
-    user: author,
-    type: 'commit',
-  };
-}
-
 export function useCommits({
   username, repo, since, until,
 }) {
@@ -63,7 +48,7 @@ export function useCommits({
       } else {
         const currentCommits = [
           ...prevCommits,
-          ...response.data.map(transformCommit).filter(
+          ...response.data.filter(
             ({ id }) => !prevCommits.some((c) => c.id === id),
           )];
         setCommits(currentCommits);
@@ -77,21 +62,6 @@ export function useCommits({
     }
   }, [username, repo, since, until]);
   return [commits, loading, error];
-}
-
-function transformPullRequest({
-  // eslint-disable-next-line camelcase
-  user, number, html_url, created_at, title,
-}) {
-  return {
-    date: created_at,
-    message: title,
-    messageHeadline: title,
-    id: `#${number}`,
-    html_url,
-    user,
-    type: 'pr',
-  };
 }
 
 export function usePullRequests({
@@ -121,7 +91,7 @@ export function usePullRequests({
       } else {
         const currentPullRequests = [
           ...prevPullRequests,
-          ...response.data.map(transformPullRequest).filter(
+          ...response.data.filter(
             ({ id }) => !prevPullRequests.some((c) => c.id === id),
           )];
         setPRs(currentPullRequests);
