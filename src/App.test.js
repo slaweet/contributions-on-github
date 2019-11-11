@@ -21,7 +21,7 @@ function renderWithRouter(
 localStorage.setItem('githubToken', 'SECRET TOKEN');
 
 describe('App', () => {
-  const route = '/?repo=lisk-hub&username=LiskHQ';
+  const route = '/?repo=lisk-hub&username=LiskHQ&since=2019-09-28&until=2019-11-11';
 
   it('renders message if config not provided', () => {
     const { container } = renderWithRouter(<App />);
@@ -43,5 +43,6 @@ describe('App', () => {
     });
     expect(wrapper.container.innerHTML).toContain('2 commits');
     expect(wrapper.container.innerHTML).toContain('1 PRs');
+    expect(wrapper.container.innerHTML).toContain('2 review comments');
   });
 });

@@ -87,14 +87,11 @@ function transformComment({
 }
 
 export const getComments = async ({
-  username, repo, page, since, until, pr,
+  username, repo, page, since, until,
 }) => {
-  const response = await getFromGithub(`/pulls/${pr.id.substr(1)}/comments`, {
-    username, repo, page,
+  const response = await getFromGithub('/pulls/comments', {
+    username, repo, page, since, until,
   });
-  response.data = response.data.map(transformComment).filter((comment) => (
-    (moment(comment.date).isAfter(since))
-    && moment(comment.date).isBefore(until)
-  ));
+  response.data = response.data.map(transformComment);
   return response;
 };
