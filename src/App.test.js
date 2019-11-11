@@ -6,8 +6,7 @@ import { createMemoryHistory } from 'history';
 import { render, act } from '@testing-library/react';
 
 import App from './App';
-import commitsApiReponse from '../test/mocks/commitsApiReponse';
-import pullRequestsApiResponse from '../test/mocks/pullRequestsApiResponse';
+import apiResponses from '../test/mocks/apiResponses';
 
 function renderWithRouter(
   ui,
@@ -35,11 +34,8 @@ describe('App', () => {
   });
 
   it('renders with 2 commits and 1 PR from the api', async () => {
-    jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve(
-      { data: commitsApiReponse },
-    ));
-    jest.spyOn(axios, 'get').mockImplementationOnce(() => Promise.resolve(
-      { data: pullRequestsApiResponse },
+    jest.spyOn(axios, 'get').mockImplementation((url) => Promise.resolve(
+      { data: apiResponses[url] },
     ));
     let wrapper;
     await act(async () => {

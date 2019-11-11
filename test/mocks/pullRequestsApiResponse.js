@@ -1,13 +1,13 @@
 /* eslint-disable max-lines */
 export default [{
-  url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2631',
+  url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2597',
   id: 338120022,
   node_id: 'MDExOlB1bGxSZXF1ZXN0MzM4MTIwMDIy',
-  html_url: 'https://github.com/LiskHQ/lisk-desktop/pull/2631',
-  diff_url: 'https://github.com/LiskHQ/lisk-desktop/pull/2631.diff',
-  patch_url: 'https://github.com/LiskHQ/lisk-desktop/pull/2631.patch',
-  issue_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2631',
-  number: 2631,
+  html_url: 'https://github.com/LiskHQ/lisk-desktop/pull/2597',
+  diff_url: 'https://github.com/LiskHQ/lisk-desktop/pull/2597.diff',
+  patch_url: 'https://github.com/LiskHQ/lisk-desktop/pull/2597.patch',
+  issue_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2597',
+  number: 2597,
   state: 'open',
   locked: false,
   title: 'Show address QR code in wallet page - Closes #2568',
@@ -104,10 +104,10 @@ export default [{
   requested_teams: [],
   labels: [],
   milestone: null,
-  commits_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2631/commits',
-  review_comments_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2631/comments',
+  commits_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2597/commits',
+  review_comments_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2597/comments',
   review_comment_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/comments{/number}',
-  comments_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2631/comments',
+  comments_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2597/comments',
   statuses_url: 'https://api.github.com/repos/LiskHQ/lisk-desktop/statuses/9cc18cc6eac666e2686df20cec888211752e460d',
   head: {
     label: 'LiskHQ:2568-qr-code-in-wallet',
@@ -361,25 +361,25 @@ export default [{
   },
   _links: {
     self: {
-      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2631',
+      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2597',
     },
     html: {
-      href: 'https://github.com/LiskHQ/lisk-desktop/pull/2631',
+      href: 'https://github.com/LiskHQ/lisk-desktop/pull/2597',
     },
     issue: {
-      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2631',
+      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2597',
     },
     comments: {
-      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2631/comments',
+      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/issues/2597/comments',
     },
     review_comments: {
-      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2631/comments',
+      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2597/comments',
     },
     review_comment: {
       href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/comments{/number}',
     },
     commits: {
-      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2631/commits',
+      href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/pulls/2597/commits',
     },
     statuses: {
       href: 'https://api.github.com/repos/LiskHQ/lisk-desktop/statuses/9cc18cc6eac666e2686df20cec888211752e460d',
