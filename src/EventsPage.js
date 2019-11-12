@@ -10,28 +10,20 @@ import {
 import React, { useState } from 'react';
 
 import { formatDate } from './utils';
-import {
-  useComments,
-  useCommits,
-  usePullRequests,
-  useQueryParamConfig,
-} from './hooks';
+import { useAllEvents, useQueryParamConfig } from './hooks';
+import PunchChart from './PunchChart';
 import ConfigFormButton from './ConfigFormButton';
 import EventsList from './EventsList';
-import PunchChart from './PunchChart';
 
 export default function EventsPage() {
   const [config] = useQueryParamConfig();
-  const [commits, isLoadingCommits, error] = useCommits(config);
-  const [pullRequests, isLoadingPullRequests] = usePullRequests(config);
-  const [comments, isLoadingComments] = useComments(config, pullRequests);
   const [commentsEmabled, toggleComments] = useState(true);
+  const [{ pullRequests, commits, comments }, isLoading, error] = useAllEvents(config);
   const events = [
     ...pullRequests,
     ...commits,
     ...(commentsEmabled ? comments : []),
   ];
-  const isLoading = isLoadingCommits || isLoadingPullRequests || isLoadingComments;
   return (
     <Card>
       <CardHeader>

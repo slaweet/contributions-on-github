@@ -77,3 +77,14 @@ export function usePullRequests(config) {
 export function useComments(config) {
   return useEvents(config, getComments);
 }
+
+export function useAllEvents(config) {
+  const [commits, isLoadingCommits, commitsError] = useCommits(config);
+  const [pullRequests, isLoadingPullRequests, pullRequestsError] = usePullRequests(config);
+  const [comments, isLoadingComments, commentsError] = useComments(config, pullRequests);
+
+  const events = { pullRequests, commits, comments };
+  const isLoading = isLoadingCommits || isLoadingPullRequests || isLoadingComments;
+  const error = commitsError || pullRequestsError || commentsError;
+  return [events, isLoading, error];
+}
