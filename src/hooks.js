@@ -81,7 +81,7 @@ export function useComments(config) {
 export function useAllEvents(config) {
   const [commits, isLoadingCommits, commitsError] = useCommits(config);
   const [pullRequests, isLoadingPullRequests, pullRequestsError] = usePullRequests(config);
-  const [comments, isLoadingComments, commentsError] = useComments(config, pullRequests);
+  const [comments, isLoadingComments, commentsError] = useComments(config);
 
   const events = { pullRequests, commits, comments };
   const isLoading = isLoadingCommits || isLoadingPullRequests || isLoadingComments;
