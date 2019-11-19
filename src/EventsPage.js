@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 
 import { formatDate } from './utils';
 import { useAllEvents, useQueryParamConfig } from './hooks';
-import PunchChart from './PunchChart';
+import Charts from './Charts';
 import ConfigFormButton from './ConfigFormButton';
 import EventsList from './EventsList';
 
@@ -48,7 +48,7 @@ export default function EventsPage() {
       <CardBody>
         {error
           ? <Alert color="danger">{`${error}`}</Alert>
-          : <PunchChart events={events} config={config} />}
+          : <Charts events={events} config={config} />}
       </CardBody>
       <EventsList events={events} />
     </Card>
