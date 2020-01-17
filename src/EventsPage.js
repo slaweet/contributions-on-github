@@ -19,6 +19,9 @@ export default function EventsPage() {
   const [config] = useQueryParamConfig();
   const [commentsEmabled, toggleComments] = useState(true);
   const [{ pullRequests, commits, comments }, isLoading, error] = useAllEvents(config);
+  const errorMessage = `${error}` === 'Error: Request failed with status code 403'
+    ? 'Authorization failed. You can resolve this by setting localStorage.setItem(\'githubToken\', \'YOUR_GITHUB_TOKEN\')'
+    : `${error}`;
   const events = [
     ...pullRequests,
     ...commits,
@@ -46,8 +49,8 @@ export default function EventsPage() {
         {` from ${formatDate(config.since)} to ${formatDate(config.until)}`}
       </CardHeader>
       <CardBody>
-        {error
-          ? <Alert color="danger">{`${error}`}</Alert>
+        {errorMessage
+          ? <Alert color="danger">{errorMessage}</Alert>
           : <PunchChart events={events} config={config} />}
       </CardBody>
       <EventsList events={events} />
