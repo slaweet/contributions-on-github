@@ -13,6 +13,8 @@
 
 Visualisation tool for GitHub commits, PRs, and comments in time
 
+![Sample screenshot](screenshot.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
