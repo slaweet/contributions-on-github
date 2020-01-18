@@ -16,7 +16,7 @@ async function getFromGithub(path, { username, repo, ...params }, transformItem)
       },
     },
   );
-  response.data = response.data.map(transformItem);
+  response.data = response.data.map(transformItem).filter(({ user }) => !!user);
   return response;
 }
 
