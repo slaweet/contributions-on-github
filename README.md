@@ -1,17 +1,17 @@
-[![CircleCI](https://circleci.com/gh/slaweet/github-commit-punch-chart.svg?style=shield)](https://circleci.com/gh/slaweet/github-commit-punch-chart)
-[![codecov](https://codecov.io/gh/slaweet/github-commit-punch-chart/branch/master/graph/badge.svg)](https://codecov.io/gh/slaweet/github-commit-punch-chart)
-[![Maintainability](https://api.codeclimate.com/v1/badges/b8558fe125761efc8eae/maintainability)](https://codeclimate.com/github/slaweet/github-commit-punch-chart/maintainability)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/slaweet/github-commit-punch-chart.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/slaweet/github-commit-punch-chart/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/slaweet/github-commit-punch-chart.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/slaweet/github-commit-punch-chart/context:javascript)
-[![Dependencies Status](https://david-dm.org/slaweet/github-commit-punch-chart/status.svg)](https://david-dm.org/slaweet/github-commit-punch-chart)
-[![devDependencies Status](https://david-dm.org/slaweet/github-commit-punch-chart/dev-status.svg)](https://david-dm.org/slaweet/github-commit-punch-chart?type=dev)
+[![CircleCI](https://circleci.com/gh/slaweet/contributions-on-github.svg?style=shield)](https://circleci.com/gh/slaweet/contributions-on-github)
+[![codecov](https://codecov.io/gh/slaweet/contributions-on-github/branch/master/graph/badge.svg)](https://codecov.io/gh/slaweet/contributions-on-github)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b8558fe125761efc8eae/maintainability)](https://codeclimate.com/github/slaweet/contributions-on-github/maintainability)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/slaweet/contributions-on-github.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/slaweet/contributions-on-github/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/slaweet/contributions-on-github.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/slaweet/contributions-on-github/context:javascript)
+[![Dependencies Status](https://david-dm.org/slaweet/contributions-on-github/status.svg)](https://david-dm.org/slaweet/contributions-on-github)
+[![devDependencies Status](https://david-dm.org/slaweet/contributions-on-github/dev-status.svg)](https://david-dm.org/slaweet/contributions-on-github?type=dev)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![JavaScript Style Guide: AirBnB](https://img.shields.io/badge/code%20style-airbnb-brightgreen.svg)](https://github.com/airbnb/javascript "AirBnB Style guide")
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# github-commit-punch-chart
+# contributions-on-github
 
-Visualisation tool for GitHub commits
+Visualisation tool for GitHub commits, PRs, and comments in time
 
 ## Available Scripts
 
