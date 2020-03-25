@@ -6401,6 +6401,18 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+lisan-types@^0.0.34-aplha.1:
+  version "0.0.34-aplha.1"
+  resolved "https://registry.yarnpkg.com/lisan-types/-/lisan-types-0.0.34-aplha.1.tgz#8bc6fb08f06a849f4f2429e755e7a61c515eea4a"
+  integrity sha512-adBspr8NIO8UZyY/RifyDcez7NfBfvPqVLF+v6u2ielyW+el1U4aeyf1ANUZpHpVt2a1X6JiPlpfNtLQaj8d4Q==
+
+lisan@^0.0.34-aplha.1:
+  version "0.0.34-aplha.1"
+  resolved "https://registry.yarnpkg.com/lisan/-/lisan-0.0.34-aplha.1.tgz#8dfb3af47de1becb0fb7a9d6795df5b40d9c9c5c"
+  integrity sha512-svj4slsoDjNamxO4US+oiPzI6Knq6KmoCh8Bd7SbiLYfo68GXP671jrf06eE7Yfe5nS4W+hGB4gcs4K6dbZ4lg==
+  dependencies:
+    lisan-types "^0.0.34-aplha.1"
+
 load-json-file@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"

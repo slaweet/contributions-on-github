@@ -8,6 +8,7 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "chartjs-plugin-colorschemes": "^0.4.0",
+    "lisan": "^0.0.34-aplha.1",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",

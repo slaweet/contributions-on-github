@@ -6,6 +6,9 @@ import { Route } from 'react-router-dom';
 import React from 'react';
 
 import EventsPage from './EventsPage';
+import { setup } from './i18n';
+
+setup();
 
 function App() {
   return (

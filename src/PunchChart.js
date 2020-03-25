@@ -1,4 +1,5 @@
 import 'chartjs-plugin-colorschemes';
+import { lisan } from 'lisan';
 
 import { Bubble } from 'react-chartjs-2';
 import { UncontrolledAlert } from 'reactstrap';
@@ -91,7 +92,7 @@ export default function PunchChart({ config, events }) {
         <Bubble data={data} options={options} />
       </div>
       <UncontrolledAlert color="info">
-      Usage Tip: Try clicking usernames or points on the chart.
+        { lisan.t('Usage Tip: Try clicking usernames or points on the chart.') }
       </UncontrolledAlert>
     </>
   );
