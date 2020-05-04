@@ -13,7 +13,7 @@
 
 Visualisation tool for GitHub commits, PRs, and comments in time
 
-![Sample screenshot](screenshot.png)
+![Sample screenshot](public/screenshot.png)
 
 ## Available Scripts
 
