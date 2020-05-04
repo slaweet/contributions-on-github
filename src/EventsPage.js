@@ -27,6 +27,7 @@ export default function EventsPage() {
     ...commits,
     ...(commentsEmabled ? comments : []),
   ];
+
   return (
     <Card>
       <CardHeader>
@@ -50,7 +51,24 @@ export default function EventsPage() {
       </CardHeader>
       <CardBody>
         {errorMessage
-          ? <Alert color="danger">{errorMessage}</Alert>
+          ? (
+            <Alert color="danger">
+              {errorMessage}
+              {!localStorage.getItem('githubToken') && (
+              <div>
+              You can set up your
+                {' '}
+                <a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line" target="_blank">GitHub token</a>
+                {' '}
+              by running
+                <div>
+                  <code>localStorage.setItem('githubToken', '[YOUR_GITHUB_TOKEN]')</code>
+                </div>
+              in the JavaScript console of this browser.
+              </div>
+              )}
+            </Alert>
+          )
           : <PunchChart events={events} config={config} />}
       </CardBody>
       <EventsList events={events} />
