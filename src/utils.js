@@ -7,11 +7,12 @@ export const formatDateAndTime = (date) => moment(date).format('YYYY-MM-DD HH:mm
 
 const githubToken = localStorage.getItem('githubToken');
 
-const githubApi = localStorage.getItem('githubApi') || 'https://api.github.com/';
 
-async function getFromGithub(path, { username, repo, ...params }, transformItem) {
+async function getFromGithub(path, {
+  username, repo, githubApi, ...params
+}, transformItem) {
   const response = await axios.get(
-    `${githubApi}/repos/${username}/${repo}${path}`, {
+    `${githubApi || 'https://api.github.com'}/repos/${username}/${repo}${path}`, {
       params,
       headers: {
         ...(githubToken && { Authorization: `Bearer ${githubToken}` }),

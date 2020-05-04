@@ -30,6 +30,11 @@ function ConfigFormButton({
     name: 'until',
     label: 'Until date',
     type: 'date',
+  }, {
+    name: 'githubApi',
+    placeholder: 'E.g. https://api.github.com',
+    label: 'GitHub Enterprise API URL (optional)',
+    optional: true,
   }];
   return (
     <UncontrolledButtonDropdown style={{ display: 'iniline-block' }}>
@@ -37,7 +42,7 @@ function ConfigFormButton({
       <DropdownMenu right>
         <Form style={{ padding: 16, width: 300 }}>
           {inputs.map(({
-            name, placeholder, label, type,
+            name, placeholder, label, type, optional,
           }) => (
             <FormGroup key={name}>
               <Label for={name}>{label}</Label>
@@ -46,7 +51,7 @@ function ConfigFormButton({
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                required
+                required={!optional}
               />
             </FormGroup>
           ))}
@@ -63,6 +68,7 @@ ConfigFormButton.propTypes = {
     repo: PropTypes.string.isRequired,
     since: PropTypes.string.isRequired,
     until: PropTypes.string.isRequired,
+    gitgubApi: PropTypes.string,
   }).isRequired,
 };
 

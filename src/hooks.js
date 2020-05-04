@@ -14,15 +14,16 @@ export function useQueryParamConfig() {
   const [username = ''] = useQueryParam('username', StringParam);
   const [since = formatEndOfDay(moment().subtract(14, 'days'))] = useQueryParam('since', StringParam);
   const [until = formatEndOfDay(moment())] = useQueryParam('until', StringParam);
+  const [githubApi = ''] = useQueryParam('githubApi', StringParam);
   const [showAvatarsAsPoints = false] = useQueryParam('showAvatarsAsPoints', BooleanParam);
 
   return [{
-    username, repo, since, until, showAvatarsAsPoints,
+    username, repo, since, until, githubApi, showAvatarsAsPoints,
   }];
 }
 
 function useEvents({
-  username, repo, since, until,
+  username, repo, since, until, githubApi,
 }, getEvents) {
   const [commits, setEvents] = useState([]);
   const [error, setError] = useState('');
@@ -40,7 +41,7 @@ function useEvents({
     async function fetchUrl(page = 1, prevEvents = []) {
       setLoading(true);
       const [err, response] = await to(getEvents({
-        repo, username, page, since, until,
+        repo, username, page, since, until, githubApi,
       }));
       setLoading(false);
       if (err) {
@@ -62,7 +63,7 @@ function useEvents({
     if (validateConfig()) {
       fetchUrl();
     }
-  }, [username, repo, since, until, getEvents]);
+  }, [username, repo, since, until, githubApi, getEvents]);
   return [commits, loading, error];
 }
 
