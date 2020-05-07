@@ -33,14 +33,14 @@ export default function EventsPage() {
       <CardHeader>
         { isLoading && <Spinner size="sm" color="secondary" />}
         &nbsp;
-        <Badge>{`${pullRequests.length} PRs`}</Badge>
+        <Badge className="p-2">{`${pullRequests.length} PRs`}</Badge>
         &nbsp;
-        <Badge>{`${commits.length} commits`}</Badge>
+        <Badge className="p-2">{`${commits.length} commits`}</Badge>
         &nbsp;
         <Label check>
-          <Badge>
+          <Badge className="p-2">
             {` ${comments.length} review comments `}
-            <input type="checkbox" checked={commentsEmabled} onChange={() => toggleComments(!commentsEmabled)} />
+            <input className="my-n1" type="checkbox" checked={commentsEmabled} onChange={() => toggleComments(!commentsEmabled)} />
           </Badge>
         </Label>
         &nbsp;
